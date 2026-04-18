@@ -1,3 +1,4 @@
 const http = require("http");
-const { getLogs } = require("./logger");
 const { HTTP_PORT } = require("./config");
+const { getStats } = require("./stats_manager");
+const { getActiveConnections } = require("./connection_manager");
