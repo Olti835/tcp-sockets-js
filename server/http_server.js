@@ -18,7 +18,6 @@ const handleRequest = (req, res) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Server Monitor</title>
                 <style>
-                
                     body {
                         font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
                         background-color: #f0f2f5;
@@ -69,7 +68,6 @@ const handleRequest = (req, res) => {
                         border-radius: 12px;
                         font-size: 14px;
                     }
-                    
                     .footer {
                         text-align: center;
                         margin-top: 20px;
@@ -77,7 +75,6 @@ const handleRequest = (req, res) => {
                         color: #9aa0a6;
                     }
                 </style>
-                
             </head>
             <body>
                 <div class="dashboard">
@@ -87,23 +84,13 @@ const handleRequest = (req, res) => {
                         <span class="label">Server Status</span>
                         <span class="value status-online">● ${stats.status.toUpperCase()}</span>
                     </div>
-
-                    
                     
                     <div class="stat-row">
                         <span class="label">Active Connections</span>
                         <span class="value">${stats.activeConnections}</span>
                     </div>
                     
-                    <div class="stat-row">
-                        <span class="label">Total Logs</span>
-                        <span class="value">${stats.totalLogs}</span>
-                    </div>
                     
-                    <div class="stat-row">
-                        <span class="label">Total Messages</span>
-                        <span class="value">${stats.totalMessages}</span>
-                    </div>
 
                     <div class="footer">
                         Last Updated: ${new Date(stats.timestamp).toLocaleTimeString()}
@@ -112,7 +99,6 @@ const handleRequest = (req, res) => {
             </body>
             </html>
             `;
-          
             
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.end(html);
@@ -122,10 +108,8 @@ const handleRequest = (req, res) => {
         }
         return;
     }
-  
 
     if (req.method === 'GET' && req.url === '/') {
-      
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(`
             <body style="font-family: sans-serif; text-align: center; margin-top: 50px;">
@@ -135,32 +119,24 @@ const handleRequest = (req, res) => {
         `);
         return;
     }
-  
 
     res.writeHead(404, { 'Content-Type': 'application/json' });
-  
     res.end(JSON.stringify({ error: "Not Found", message: "Try GET /stats" }));
 };
 
-
 const server = http.createServer(handleRequest);
 
-
-
-function startServer() {
-  
+function startHttpServer() {
     const port = config.HTTP_PORT || 8080; 
-
-
-  
+    
     server.listen(port, () => {
-        console.log('\n===============================================');
+        console.log('\n=================================================');
         console.log(`[HTTP SERVER] Monitoring interface is LIVE`);
         console.log(` View stats at: http://localhost:${port}/stats`);
-        console.log('===============================================\n');
+        console.log('=================================================\n');
     });
 }
 
 module.exports = {
-    startServer
+    startHttpServer
 };

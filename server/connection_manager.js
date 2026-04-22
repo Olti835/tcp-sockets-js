@@ -1,15 +1,15 @@
-const connections = new Set();
+let connections = {count: 0}; 
 
-function addConnection(socket) {
-  connections.add(socket);
+function addConnection() {
+  connections.count++;
 }
 
-function removeConnection(socket) {
-  connections.delete(socket);
+function removeConnection() {
+  connections.count--;
 }
 
 function getActiveConnections() {
-  return connections.size;
+  return connections.count;
 }
 
 module.exports = {
