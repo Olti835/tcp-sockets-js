@@ -1,19 +1,19 @@
 const fs = require("fs");
 
 function listFiles(dir) {
-  return fs.readdir(dir);
+  return fs.readdirSync(dir);
 }
 
 function readFile(path) {
-  return fs.readFile(path, "utf-8");
+  return fs.readFileSync(path, "utf-8");
 }
 
 function writeFile(path, data) {
-  fs.writeFile(path, data);
+  fs.writeFileSync(path, data);
 }
 
 function deleteFile(path) {
-  fs.unlink(path);
+  fs.unlinkSync(path);
 }
 
 module.exports = {
