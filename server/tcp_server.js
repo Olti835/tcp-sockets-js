@@ -28,7 +28,6 @@ const server = net.createServer((socket) => {
     const parts = msg.split(" ");
     const command = parts[0]?.toLowerCase();
 
-    // LOGIN
     if (command === "login") {
       const username = parts[1];
       const password = parts[2];
@@ -44,13 +43,11 @@ const server = net.createServer((socket) => {
       return;
     }
 
-    // Pa login nuk lejohet asgje
     if (!currentUser) {
       socket.write("Login first!\n");
       return;
     }
 
-    // LIST
     if (command === "list") {
       try {
         const files = fileManager.listFiles(DATA_DIR);
@@ -68,7 +65,6 @@ const server = net.createServer((socket) => {
       return;
     }
 
-    // READ
     if (command === "read") {
       const filename = parts[1];
 
@@ -88,7 +84,6 @@ const server = net.createServer((socket) => {
       return;
     }
 
-    // MATH
     if (command === "math") {
       const operation = parts[1];
 
@@ -99,12 +94,10 @@ const server = net.createServer((socket) => {
 
       let a, b;
 
-      // Forma: math sum 2 3
       if (parts.length >= 4) {
         a = parts[2];
         b = parts[3];
       }
-      // Forma: math sum 2,3
       else if (parts.length >= 3 && parts[2].includes(",")) {
         const nums = parts[2].split(",");
         a = nums[0];
